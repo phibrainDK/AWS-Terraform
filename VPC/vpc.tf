@@ -13,9 +13,12 @@ module "vpc" {
   # enable_network_address_usage_metrics = true
   # enable_ipv6                          = true
 
-  azs             = local.azs
-  private_subnets = local.private_subnets
-  public_subnets  = local.public_subnets
+  azs                              = local.azs
+  private_subnets                  = local.private_subnets
+  public_subnets                   = local.public_subnets
+  enable_flow_log                  = true
+  flow_log_cloudwatch_iam_role_arn = aws_iam_role.vpc_flowlogs_role.arn
+  flow_log_destination_arn         = aws_cloudwatch_log_group.vpc_flowlogs_cloudwatch.arn
 
   manage_default_network_acl = true
   #################################
@@ -44,10 +47,10 @@ module "vpc" {
     # HTTPS
     {
       rule_number = 300
-      protocol    = "tcp"
+      protocol    = "-1"
       rule_action = "allow"
-      from_port   = 443
-      to_port     = 443
+      from_port   = 0
+      to_port     = 0
       cidr_block  = "0.0.0.0/0"
     }
   ]

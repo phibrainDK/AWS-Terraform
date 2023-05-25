@@ -39,13 +39,12 @@ resource "aws_lb" "alb" {
   load_balancer_type = "application"
   security_groups    = [aws_security_group.alb_sg.id]
   subnets            = tolist(module.vpc.public_subnets)
-  /*
-    access_logs {
+
+  access_logs {
     bucket  = aws_s3_bucket.logs_alb_s3.bucket
     prefix  = "alb-logs"
     enabled = true
-    }
-  */
+  }
   tags = {
     Name = "${local.prefix}-alb-poc-ad"
   }
