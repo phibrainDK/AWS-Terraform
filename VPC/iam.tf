@@ -51,7 +51,9 @@ resource "aws_iam_policy" "ec2_policy" {
           "elasticfilesystem:DeleteMountTarget",
           "elasticfilesystem:DeleteFileSystem",
           "elasticfilesystem:DescribeFileSystems",
-          "s3:PutObject"
+          "s3:PutObject",
+          "s3:ListObjects",
+          "s3:ListBuckets"
         ]
         Effect   = "Allow"
         Resource = "*"

@@ -3,7 +3,7 @@ provider "aws" {
 }
 
 data "aws_elb_service_account" "main" {}
-
+data "aws_availability_zones" "available" {}
 
 resource "aws_key_pair" "tf-key-pair" {
   count      = local.n_instance

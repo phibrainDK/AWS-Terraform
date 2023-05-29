@@ -117,6 +117,16 @@ resource "aws_security_group" "ec2_private_security_group" {
     security_groups = aws_lb.alb.security_groups
     description     = "VPC - Access from Load Balancer"
   }
+  ingress {
+    cidr_blocks = [
+      "0.0.0.0/0"
+    ]
+    from_port   = 0
+    protocol    = "icmp"
+    to_port     = 0
+    description = "VPC - ICMP Endpoint enable"
+  }
+
   egress {
     cidr_blocks = [
       "0.0.0.0/0"
